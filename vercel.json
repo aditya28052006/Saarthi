@@ -1,31 +1,32 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "api/index.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.py"
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
     },
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "source": "/farmer",
+      "destination": "/portal.html"
     },
     {
-      "src": "/(farmer|map|timeline|advisory|officer|intelligence)",
-      "dest": "/static/portal.html"
+      "source": "/map",
+      "destination": "/portal.html"
     },
     {
-      "src": "/",
-      "dest": "/static/index.html"
+      "source": "/timeline",
+      "destination": "/portal.html"
     },
     {
-      "src": "/(.*)",
-      "dest": "/static/$1"
+      "source": "/advisory",
+      "destination": "/portal.html"
+    },
+    {
+      "source": "/officer",
+      "destination": "/portal.html"
+    },
+    {
+      "source": "/intelligence",
+      "destination": "/portal.html"
     }
   ]
 }
