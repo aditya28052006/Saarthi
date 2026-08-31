@@ -285,9 +285,10 @@ def crop_advice(prob):
     }
 
 
-# --- API ROUTES ---
+# --- API ROUTES (Dual-bound for both /api/* and /*) ---
 
-@app.get("/api/health")
+@app.route("/api/health", methods=["GET"])
+@app.route("/health", methods=["GET"])
 def health():
     return jsonify({
         "status": "ready",
@@ -300,7 +301,8 @@ def health():
     })
 
 
-@app.get("/api/panchayats")
+@app.route("/api/panchayats", methods=["GET"])
+@app.route("/panchayats", methods=["GET"])
 def get_panchayats():
     block = request.args.get("block")
     if block and block in BLOCK_PANCHAYATS:
@@ -308,7 +310,8 @@ def get_panchayats():
     return jsonify({"district": "Sangrur", "blocks": BLOCKS, "panchayats_by_block": BLOCK_PANCHAYATS, "total_indexed": "1,200+"})
 
 
-@app.get("/api/map-data")
+@app.route("/api/map-data", methods=["GET"])
+@app.route("/map-data", methods=["GET"])
 def get_map_data():
     features_list = []
     for v in VILLAGE_GEO_MAP:
@@ -339,7 +342,8 @@ def get_map_data():
     })
 
 
-@app.get("/api/outlook/<block>")
+@app.route("/api/outlook/<block>", methods=["GET"])
+@app.route("/outlook/<block>", methods=["GET"])
 def get_outlook(block):
     horizon = int(request.args.get("days", 30))
     conditions = BLOCK_CONDITIONS.get(block, BLOCK_CONDITIONS["Sangrur"]).copy()
@@ -362,7 +366,7 @@ def get_outlook(block):
             "tone": "wait",
             "message": "A severe dry spell is likely in this block. Hold seed sowing for about 7 days and protect available root-zone soil moisture.",
             "punjabi": "ਅਗਲੇ 7 ਦਿਨ ਬੀਜ ਨਾ ਬੀਜੋ। ਖੇਤ ਦੀ ਨਮੀ ਬਚਾਓ ਅਤੇ ਸਿੰਚਾਈ ਦਾ ਪ੍ਰਬੰਧ ਰੱਖੋ।",
-            "hindi": "अगले 7 दिन बुवाई न करें। खेत की नमी बचाएँ और सिंचाई की व्यवस्था रखें。"
+            "hindi": "अगले 7 दिन बुवाई न करें। खेत की नमी बचाएँ और सिंचाई की व्यवस्था रखें।"
         }
     elif prob >= 0.30:
         decision = {
@@ -430,7 +434,8 @@ def get_outlook(block):
     })
 
 
-@app.post("/api/predict")
+@app.route("/api/predict", methods=["POST"])
+@app.route("/predict", methods=["POST"])
 def predict():
     payload = request.get_json(force=True) or {}
     r3 = float(payload.get("rain_3d", 0))
@@ -455,7 +460,8 @@ def predict():
     })
 
 
-@app.post("/api/farmer-analysis")
+@app.route("/api/farmer-analysis", methods=["POST"])
+@app.route("/farmer-analysis", methods=["POST"])
 def farmer_analysis():
     payload = request.get_json(force=True) or {}
     block = payload.get("block", "Sunam")
