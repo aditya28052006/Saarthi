@@ -1,4 +1,6 @@
 {
+  "framework": null,
+  "buildCommand": "echo 'Static hosting'",
   "outputDirectory": "src/main/resources/static",
   "rewrites": [
     {
