@@ -30,11 +30,11 @@ public class ApiController {
     public ResponseEntity<Map<String, Object>> health() {
         Map<String, Object> resp = new LinkedHashMap<>();
         resp.put("status", "ready");
-        resp.put("backend_runtime", "Java 21 · Spring Boot 3.3.3");
+        resp.put("backend_runtime", "Java 17 · Spring Boot 3.3.3");
         resp.put("district", "Sangrur District, Punjab");
         resp.put("blocks_monitored", districtService.getBlocks().size());
         resp.put("panchayats_indexed", "1,200+");
-        resp.put("model_source", "Random Forest Classifier (200 trees, 6 features) — SIH26086");
+        resp.put("model_source", MlPredictionService.MODEL_SOURCE);
         resp.put("features", Arrays.asList("rain_3d", "rain_7d", "rain_14d", "rain_30d", "dry_days_7d", "dry_days_14d"));
         return ResponseEntity.ok(resp);
     }

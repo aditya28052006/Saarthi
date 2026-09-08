@@ -1,26 +1,27 @@
-# Monsoon Saarthi prototype
+# SAARTHI — Hyperlocal Monsoon Intelligence Platform
 
-A polished web prototype for SIH26086: **Hyperlocal Monsoon Onset & Break Prediction System**. The API uses the same Random Forest, rainfall-window features, and dry-spell risk bands defined in `saarthi_prototype_1.ipynb`.
+A Spring Boot backend application for the **Hyperlocal Monsoon Onset & Break Prediction System**.
 
-## Run locally
+## Run Locally
 
-1. Install Python 3.10+.
-2. From this folder, install the dependencies:
+### Prerequisites
+* Java JDK 17+
+* Apache Maven 3.x
 
-   ```powershell
-   py -m pip install -r requirements.txt
-   ```
+### Start Server
 
-3. Start the site:
+```powershell
+mvn spring-boot:run
+```
 
-   ```powershell
-   py app.py
-   ```
+Open `http://127.0.0.1:5000` in your browser.
 
-4. Open `http://127.0.0.1:5000`.
+## ML Model Integration
 
-## Connect the notebook data
+The ML prediction interface is clean and decoupled in [MlPredictionService.java](file:///c:/Users/Aditya%20Gupta/Saarthi/src/main/java/com/saarthi/service/MlPredictionService.java).
 
-Place the notebook's `Sangrur_Block_Daily_Rainfall_2010_2025.csv` in the `data` folder and restart the server. It must contain `date`, `block`, and `rainfall_mm` columns. The backend automatically recreates the notebook's rolling rainfall and dry-day features, trains the `RandomForestClassifier`, and serves `/api/predict` to the UI.
+To plug in your new ML model:
+1. Update `calculateDrySpellProbability` or `predict` in `MlPredictionService.java`.
+2. Connect your trained model weights, ONNX/PMML runtime, or Python REST inference endpoint.
+3. Re-run `mvn spring-boot:run`.
 
-When the CSV is not present, it uses deterministic **demo data** so the interaction can be presented without pretending it is a live weather forecast. The page labels this in the result card.
