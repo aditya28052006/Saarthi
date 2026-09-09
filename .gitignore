@@ -8,3 +8,7 @@ __pycache__/
 .DS_Store
 *.log
 .system_generated/
+.venv/
+apache-maven-3.9.6/
+node_modules/
+backend/node_modules/
