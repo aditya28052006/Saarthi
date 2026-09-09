@@ -1,4 +1,4 @@
-# SAARTHIIIIII — Hyperlocal Monsoon Intelligence Platform
+# SAARTHI — Hyperlocal Monsoon Intelligence Platform
 
 A Spring Boot backend application for the **Hyperlocal Monsoon Onset & Break Prediction System**.
 
