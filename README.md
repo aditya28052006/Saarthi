@@ -24,4 +24,5 @@ To plug in your new ML model:
 1. Update `calculateDrySpellProbability` or `predict` in `MlPredictionService.java`.
 2. Connect your trained model weights, ONNX/PMML runtime, or Python REST inference endpoint.
 3. Re-run `mvn spring-boot:run`.
+4. Hello
 
